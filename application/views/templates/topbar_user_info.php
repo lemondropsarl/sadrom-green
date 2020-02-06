@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!-- Nav Item - User Information -->
 <li class="nav-item dropdown no-arrow">

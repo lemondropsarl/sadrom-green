@@ -1,5 +1,5 @@
 <?php
-
+defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <!-- Nav Item - Alerts -->
 <li class="nav-item dropdown no-arrow mx-1">
