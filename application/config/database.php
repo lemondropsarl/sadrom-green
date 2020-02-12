@@ -75,12 +75,12 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'sadrom',
+	   'hostname' => 'localhost',
+    'username' => 'root',
+    'password' => 'root',
+    'database' => 'sadrom',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => 'sd_',
+    'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,

@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/lemoncare/';
+$config['base_url'] = "http://localhost/lemoncare/";
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +76,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'french';
+$config['language']	= 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -532,3 +532,10 @@ $config['proxy_ips'] = '';
 $config['modules_locations'] = array(
     APPPATH . 'modules/' => '../modules/',
 );
+
+/*
+  |--------------------------------------------------------------------------
+  | SADROM Current version
+  |--------------------------------------------------------------------------
+*/
+$config['current_version'] = '0.1.0';
