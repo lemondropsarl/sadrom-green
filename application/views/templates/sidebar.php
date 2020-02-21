@@ -40,10 +40,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Menu client</h6>
-				<a class="collapse-item" href="<?php base_url();?>customer/insert">Nouveau client</a>
-				<a class="collapse-item" href="buttons.html">Tous les clients</a>
-				<a class="collapse-item" href="cards.html">Gestion de contrat</a>
-				<a class="collapse-item" href="cards.html">Messaging</a>
+				<a class="collapse-item" href="<?php echo base_url('customer/insert');?>">Nouveau client</a>
+				<a class="collapse-item" href="<?php echo base_url('customer/list');?>">Tous les clients</a>
+				<a class="collapse-item" href="<?php echo base_url('customer/account');?>">Gestion de contrat</a>
+				
 			</div>
 		</div>
 	</li>
@@ -52,16 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
 			aria-expanded="true" aria-controls="collapseUtilities">
-			<i class="fas fa-fw fa-wrench"></i>
-			<span>Utilities</span>
+			<i class="fas fa-fw fa-envelop"></i>
+			<span>Messagerie</span>
 		</a>
 		<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Custom Utilities:</h6>
-				<a class="collapse-item" href="utilities-color.html">Colors</a>
-				<a class="collapse-item" href="utilities-border.html">Borders</a>
-				<a class="collapse-item" href="utilities-animation.html">Animations</a>
-				<a class="collapse-item" href="utilities-other.html">Other</a>
+				<h6 class="collapse-header">Message Menu</h6>
+				<a class="collapse-item" href="utilities-color.html">Nouveau message</a>
+				<a class="collapse-item" href="utilities-border.html">Boite de reception</a>
 			</div>
 		</div>
 	</li>

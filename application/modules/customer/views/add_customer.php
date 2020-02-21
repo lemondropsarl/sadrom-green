@@ -60,7 +60,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<input type="text" name="pnumber" id="pnumber" placeholder="Tel: 243-xxxx" class="form-control">
 				</div>
 			</div>
-			<div class="form-group pull-right">
+			<div class="form-group form-row">
+				<label for="subscription" class="col-sm-2 col-form-label">Subscription</label>
+				<div class="col-sm-6">
+				<select name="dsub" id="dsub" class="form-control">
+							<option value="" selected="true" >-----Sélectionner la subscription-----</option>
+						<?php foreach ($sub_options as $option) {?>
+							<option value="<?php echo $option['id'];?>"><?php echo $option['sub_name'];?> (<?php echo $option['sub_price'];?> USD)</option>
+						<?php }?>
+					</select>
+				</div>
+			</div>
+			<div class="align-content-end">
 			
 					<button type="submit" class="btn btn-success btn-circle ">
 						<span class="fas fa-check"></span>
