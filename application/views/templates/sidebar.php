@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<li class="nav-item">
 		<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
 			aria-expanded="true" aria-controls="collapseUtilities">
-			<i class="fas fa-fw fa-envelop"></i>
+			<i class="fas fa-fw fa-envelope"></i>
 			<span>Messagerie</span>
 		</a>
 		<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
