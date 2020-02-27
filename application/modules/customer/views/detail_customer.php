@@ -23,7 +23,7 @@ $diff  = date_diff($date1,$date2);
 					<a href="<?php echo site_url('customer/edit/'.$customer['cust_id']);?>" class="btn btn-primary btn-sm btn-circle">
 						<i class="fas fa-user-edit"></i>
 					</a>
-					<a href="<?php echo site_url('message/send/'.$customer['cust_id']);?>" class="btn btn-dark btn-hover btn-sm btn-circle">
+					<a href="#" data-toggle="modal" data-target="#send" class="btn btn-dark btn-hover btn-sm btn-circle">
 						<i class="fas fa-envelope"></i>
 					</a>
 				</div>
@@ -101,5 +101,47 @@ $diff  = date_diff($date1,$date2);
 		</div>
 
 	</div>
+	<div class="modal fade" id="send" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Envoyer un SMS</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<?php echo form_open('messaging/send_sms');?>
+			<div class="modal-body">
+			<div class="form-group form-row">
+				<label class="col-sm-3 col-form-label">Nom</label>
+				<div class="col-sm-7">
+					<input type="text" id="name" name="name" class="form-control readonly" readonly="true" value="<?php echo $customer['first_name']; ?> <?php echo $customer['last_name'];?>" />
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<label class="col-sm-3 col-form-label">Numero Tel</label>
+				<div class="col-sm-7">
+					<input type="text" id="pnumber" name="pnumber" class="form-control readonly" readonly="true" value="<?php echo $customer['phone_number']; ?>" />
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<label class="col-sm-3 col-form-label">Message</label>
+				<div class="col-sm-7">
+				
+				<textarea name="message" id="message" cols="30" rows="3" class="form-control"></textarea>
+			    </div>
+			</div>
+			
+			<div class="modal-footer">
+				<button class="btn btn-danger btn-circle" type="button" data-dismiss="modal"><i class="far fa-window-close"></i></button>
+				<a class="btn btn-success btn-circle" href="login.html"><i class="fas fa-paper-plane"></i></a>
+			</div>
+			<?php echo form_close();?>
+			
+		</div>
+	</div>
+</div>
 </div>
 <!--end of content-->
+<!--modal-->
