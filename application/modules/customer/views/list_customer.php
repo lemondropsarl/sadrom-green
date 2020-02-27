@@ -24,11 +24,8 @@
                             <th><?php echo $item['address'];?> </th>
                             <th><?php echo $item['phone_number'];?></th>
                             <th>
-                                <a href="<?php echo site_url('customer/edit/'.$item['cust_id'])?>" class="btn btn-circle btn-warning btn-sm">
-                                    <i class="fas fa-pen-fancy"></i>
-                                </a>
-                                <a href="<?php echo site_url('customer/details/'.$item['cust_id'])?>" class="btn btn-circle btn-info btn-sm">
-                                    <i class="fas fa-info-circle"></i>
+                                <a href="<?php echo site_url('customer/details/'.$item['cust_id']);?>" class="btn btn-circle btn-primary btn-sm">
+                                    <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </th>
                         </tr>
