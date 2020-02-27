@@ -58,6 +58,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- Page level custom scripts -->
 <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
 <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js');?>"></script>
+<!-- Remember to include jQuery :) -->
+
 
 </body>
 

@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Lemon Care - Dashboard</title>
+	<title>Sadrom green</title>
 
 	<!-- Custom fonts for this template-->
 	<link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet" type="text/css">
