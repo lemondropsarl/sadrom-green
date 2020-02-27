@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/sadrom';
+$config['base_url'] = 'http://localhost/sadrom/';
 
 /*
 |--------------------------------------------------------------------------
@@ -545,11 +545,3 @@ $config['current_version'] = '0.1.0';
   | SADROM ORANGE SMS CLIENT ID
   |--------------------------------------------------------------------------
 */
-$config['clientId'] = 'yVui43Cx8g1YWh5a8ypYHRmweVgnGPfj';
-
-/*
-  |--------------------------------------------------------------------------
-  | SADROM ORANGE SMS CLIENT SECRET
-  |--------------------------------------------------------------------------
-*/
-$config['clientSecret'] = 'x3o3No6h6fiCBDZ6';
