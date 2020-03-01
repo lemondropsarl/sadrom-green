@@ -9,7 +9,7 @@ class Messaging extends MX_Controller{
         $this->load->database();
     }
 
-    public function send_sms($callfrom){
+    public function send_sms(){
 
         $customer_id = "";
         $receiver = $this->input->post('pnumber');
@@ -21,21 +21,13 @@ class Messaging extends MX_Controller{
         $done = $this->messaging_model->sendSMS($sender,$receiver,$message,$sender_name);
         if (!$done) {
             # code...
+            echo "message not sent";
         }else {
             
-            //Show a cconfirmation dialog
-            //redirect
-            if ($callfrom == 'detail') {
-                # code...
-                redirect('customer/details'.$customer_id);
-            }else {
-                redirect('customer/account');
-            }
+            echo "message sent successfully";
         }
 
-    }
-   
-    
+    }   
 }
 
 ?>

@@ -127,7 +127,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 				url: "<?php echo site_url('settings/api_add');?>",
 				dataType: "json",
 				success: function (response) {
-					<?php echo "done!";?>
+					
 				}
 			});
 		});

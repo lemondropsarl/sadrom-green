@@ -19,8 +19,8 @@ class setting_model extends CI_Model{
         return $query->result_array();
         
     }
-    public function get_api_by_name($name){
-        $query = $this->db->get_where('api_setting',array('api_name' =>$name));
+    public function get_api_by_appId($appId){
+        $query = $this->db->get_where('api_setting',array('api_appId' =>$appId));
         $query->row_array();
         if ($query == null) {
             # code...

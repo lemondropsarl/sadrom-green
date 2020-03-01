@@ -1,33 +1,31 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require 'vendor/autoload.php';
 use Osms\Osms;
 
 class messaging_model extends CI_Model{
 
-    private $clientId = '';
-    private $clientSecret ='';
-    private $myConfig = array('clientId','clientSecret','token');
+    
     public function __construct(){
         parent::__construct();
+        $this->load->model('setting_model');
         $this->load->database();
 
     }
-    private function initialize($client_id, $client_secret){
-        $this->clientId = $client_id;
-        $this->clientSecret = $client_secret;
-
-        $this->myConfig['clientId'] = $this->clientId;
-        $this->myConfig['clientSecret'] = $this->clientSecret;
-
-    }
+   
     public function sendSMS($sender, $receiver, $message, $senderName){
+        $appId = $this->config->item('osms_appId');
+        $api = $this->setting_model->get_api_by_appId($appId);
 
+        $senderAddress = 'tel:+'.$sender;
+        $receiverAddress = 'tel:+'.$receiver;
         //Instatiate
-        $osms = New Osms($this->myConfig);
-
-        $respnse = $osms->sendSms($sender,$receiver,$message,$senderName);
+        $config = array(
+            'token' => $api['api_token']
+        );
+        $osms = New Osms($config);
+        $osms->setVerifyPeerSSL(false);
+        $response = $osms->sendSms($senderAddress,$receiverAddress,$message,$senderName);
         if (empty($response['error'])) {
 
             return true;
@@ -38,9 +36,7 @@ class messaging_model extends CI_Model{
         }
         
     }
-    function check_token_validity(){}
-    function generate_token(){}
-    function get_api_settings(){}
+   
 }
 
 

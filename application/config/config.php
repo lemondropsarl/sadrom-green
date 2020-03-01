@@ -545,4 +545,4 @@ $config['current_version'] = '0.1.0';
   | SADROM ORANGE SMS APP ID
   |--------------------------------------------------------------------------
 */
-$config['orange_appId'] = 'B7TRNnGJWwRpfNKZ';
+$config['osms_appId'] = 'B7TRNnGJWwRpfNKZ';
