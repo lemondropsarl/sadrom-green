@@ -10,7 +10,6 @@ class Dashboard extends MX_Controller{
         function index(){
 	
 		$this->load->view('templates/header');
-		$this->load->view('templates/sidebar');
 		$this->load->view('templates/topbar_search');
 		$this->load->view('templates/topbar_alerts');
 		$this->load->view('templates/topbar_user_info');

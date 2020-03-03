@@ -13,7 +13,6 @@ class Customer extends MX_Controller{
     function list(){
         $data['clients'] =  $this->customer_model->get_customers();
         $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -30,7 +29,6 @@ class Customer extends MX_Controller{
        if ($this->form_validation->run() == FALSE) {
            # code...
            $this->load->view('templates/header');
-           $this->load->view('templates/sidebar');
            $this->load->view('templates/topbar_search');
            $this->load->view('templates/topbar_alerts');
            $this->load->view('templates/topbar_user_info');
@@ -78,7 +76,6 @@ class Customer extends MX_Controller{
             if ($this->form_validation->run() == false) {
                 # code...
                 $this->load->view('templates/header');
-                $this->load->view('templates/sidebar');
                 $this->load->view('templates/topbar_search');
                 $this->load->view('templates/topbar_alerts');
                 $this->load->view('templates/topbar_user_info');
@@ -115,7 +112,6 @@ class Customer extends MX_Controller{
             $data['customer'] = $this->customer_model->get_by_id($customer_id);
             $data['subscription'] = $this->customer_model->get_customer_sub_id($customer_id);
             $this->load->view('templates/header');
-            $this->load->view('templates/sidebar');
             $this->load->view('templates/topbar_search');
             $this->load->view('templates/topbar_alerts');
             $this->load->view('templates/topbar_user_info');
@@ -128,7 +124,6 @@ class Customer extends MX_Controller{
     function account(){
         $data['contracts'] = $this->customer_model->get_contract();
         $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');

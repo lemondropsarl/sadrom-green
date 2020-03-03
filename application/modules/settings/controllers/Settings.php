@@ -14,7 +14,6 @@ class Settings extends MX_Controller{
         $data['apis'] =  $this->setting_model->get_apis();
        
         $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -50,5 +49,14 @@ class Settings extends MX_Controller{
     }
     function api_token(){}
     function api_remove($id){}
+    function app_setting_add(){
+
+    }
+    function app_setting_edit(){
+
+    }
+    function get_app_setting(){
+
+    }
     
 }

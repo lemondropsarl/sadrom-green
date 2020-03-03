@@ -13,7 +13,7 @@ class setting_model extends CI_Model{
         $this->load->database();
     }
 
-
+//API setting model
     public function get_apis(){
         $query = $this->db->get('api_setting');
         return $query->result_array();
@@ -72,5 +72,13 @@ class setting_model extends CI_Model{
     }
     public function api_delete($id){
         $this->db->delete('api_setting',array('api_id'=>$id));
+    }
+    //General APP setting
+    public function get_app_setting(){
+        $query = $this->db->get('app_setting');
+        return $query->row_array();
+    }
+    public function app_setting_add($data){
+        $this->db->insert('app_setting',$data);
     }
 }
