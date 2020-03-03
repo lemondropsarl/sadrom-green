@@ -57,6 +57,16 @@ class Settings extends MX_Controller{
     }
     function get_app_setting(){
 
+        //get header data
+        $data['header'] = $this->setting_model->get_app_setting();
+        $data['app'] = $data['header'];
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/topbar_search');
+        $this->load->view('templates/topbar_alerts');
+        $this->load->view('templates/topbar_user_info');
+        $this->load->view('app_setting', $data);
+        $this->load->view('templates/footer');
+
     }
     
 }

@@ -81,4 +81,22 @@ class setting_model extends CI_Model{
     public function app_setting_add($data){
         $this->db->insert('app_setting',$data);
     }
+    public function get_sender(){
+        $this->db->select('app_contact');
+        $row = $this->db->get('app_setting');
+        $row->row_array();
+        if (!empty($row['app_contact'])) {
+            # code...
+            return $row['app_contact'];
+        }
+    }
+    public function get_sender_name(){
+        $this->db->select('app_contact_name');
+        $row = $this->db->get('app_setting');
+        $row->row_array();
+        if (!empty($row['app_contact'])) {
+            # code...
+            return $row['app_contact_name'];
+        }
+    }
 }
