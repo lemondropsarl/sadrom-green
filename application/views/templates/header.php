@@ -91,8 +91,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Message Menu</h6>
-						<a class="collapse-item" href="utilities-color.html">Nouveau message</a>
-						<a class="collapse-item" href="utilities-border.html">Boite de reception</a>
+						<a class="collapse-item" href="utilities-color.html">Envoyer SMS</a>
+						<a class="collapse-item" href="<?php echo base_url('messaging/template');?>">SMS Template</a>
 					</div>
 				</div>
 			</li>
