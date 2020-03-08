@@ -12,7 +12,9 @@
 	},
 	"require": {
 		"php": ">=5.3.7",
-		"ismaeltoe/osms": "^2.0"
+		"ismaeltoe/osms": "^2.0",
+		"nicmart/string-template": "^0.1.1",
+		"mustache/mustache": "^2.13"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"

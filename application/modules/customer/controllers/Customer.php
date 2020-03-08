@@ -8,6 +8,7 @@ class Customer extends MY_Controller{
         parent::__construct();
         $this->load->model('customer_model');
         $this->load->model('settings/setting_model');
+        $this->load->model('messaging/messaging_model');
         $this->load->library('form_validation');
         $this->load->database();
     }
@@ -99,7 +100,7 @@ class Customer extends MY_Controller{
                         'phone_number'=> $this->input->post('pnumber')
                     );
                     $this->customer_model->update_customer($id,$model);
-                    redirect('customer/details'.$id);
+                    redirect('customer/details/'.$id);
                 }
               
             }
@@ -114,6 +115,7 @@ class Customer extends MY_Controller{
             $data['customer'] = $this->customer_model->get_by_id($customer_id);
             $data['subscription'] = $this->customer_model->get_customer_sub_id($customer_id);
             $data['header'] =$this->setting_model->get_app_setting();
+            $data['tpls'] = $this->messaging_model->get_tpl();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/topbar_search');
             $this->load->view('templates/topbar_alerts');
