@@ -45,7 +45,7 @@ class customer_model extends CI_Model {
                 $query = $this->db->get('subscriptions');
                 return $query->result_array();
         }
-        public function get_customer_sub_id ($id){
+        public function get_customer_sub_by_id ($id){
                $query =  $this->db->get_where('customer_subscription',array('cust_id'=>$id));
                return $query->row_array();
         }
@@ -70,6 +70,14 @@ class customer_model extends CI_Model {
                 $this->db->select('adresse');
                 $query = $this->db->get_where('customers',array('cust_id'=>$id));
                 return $query->row_array();
+        }
+        public function update_customer_account($data, $id){
+                
+                $this->db->update('accounts',$data,array('acc_id'=>$id));
+        }
+        public function get_acc_by_id($customer_id){
+                $query = $this->db->get_where('accounts',array('customer_id'=> $customer_id));
+                return $query->row_array();              
         }
 
 }

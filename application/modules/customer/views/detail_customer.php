@@ -48,7 +48,7 @@ $diff  = date_diff($date1,$date2);
 			<div class="card border-bottom-warning shadow mb-4">
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="card-subtite font-weight-bold text-warning">Subscription</h6>
-					<a href="<?php echo site_url('customer/account_upgrade/'.$customer['cust_id']);?>"
+					<a href="#" data-toggle="modal" data-target="#upgrade"
 						class="btn btn-info btn-sm btn-icon-split">
 						<span class="icon text-white-50">
 							<i class="fas fa-angle-double-up"></i>
@@ -117,18 +117,13 @@ $diff  = date_diff($date1,$date2);
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<?php echo form_open('messaging/send_sms');?>
+				<?php echo form_open('messaging/send');?>
 				<div class="modal-body">
-					<div class="form-group form-row">
-						<label class="col-sm-3 col-form-label">Nom</label>
-						<div class="col-sm-7">
-							<input type="text" id="name" name="name" class="form-control readonly" readonly="true"
-								value="<?php echo $customer['first_name']; ?> <?php echo $customer['last_name'];?>" />
-						</div>
-					</div>
+
 					<div class="form-group form-row">
 						<label class="col-sm-3 col-form-label">Numero Tel</label>
 						<div class="col-sm-7">
+							<input type="hidden" name="cid" id="cid" value="<?php echo $customer['cust_id'];?>">
 							<input type="text" id="pnumber" name="pnumber" class="form-control readonly" readonly="true"
 								value="<?php echo $customer['phone_number']; ?>" />
 						</div>
@@ -136,7 +131,7 @@ $diff  = date_diff($date1,$date2);
 					<div class="form-group form-row">
 						<label class="col-sm-3 col-form-label">Message</label>
 						<div class="col-sm-7">
-							<textarea name="message" id="message" cols="30" rows="3" class="form-control"></textarea>
+							<textarea name="tpltxt" id="tpltxt" cols="30" rows="3" class="form-control"></textarea>
 						</div>
 					</div>
 
@@ -151,21 +146,55 @@ $diff  = date_diff($date1,$date2);
 			</div>
 		</div>
 	</div>
+	<div class="modal fade" id="upgrade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLAbel" aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Mise à niveau subscription</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<?php echo form_open('customer/account_upgrade/'.$customer['cust_id']);?>
+				<div class="modal-body">
+					<div class="form-group form-row">
+						<label class="col-sm-3 col-form-label">Subscription</label>
+						<div class="col-sm-7">
+							<select name="sub" id="sub" class="form-control">								
+								<?php foreach ($subs as $sub) {?>
+
+								<option value="<?php echo $sub['id'];?>"><?php echo $sub['sub_name'];?> (<?php echo $sub['sub_price'];?> USD)</option>
+								<?php } ?>
+
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success btn-circle"><i class="fas fa-arrow-up"></i></button>
+				</div>
+				<?php echo form_close();?>
+
+			</div>
+		</div>
+	</div>
+</div>
 	<!--end of content-->
 	<script type="text/javascript">
 		$(function () {
-			$("#sendsms").submit(function (e) { 
+			$("#sendsms").submit(function (e) {
 				e.preventDefault();
 				$.ajax({
 					type: "POST",
-					url: "<?php echo site_url('messaging/send_sms');?>",				
+					url: "<?php echo site_url('messaging/send');?>",
 					dataType: "json",
 					success: function (response) {
 						//hide modal
 						$("#send").modal('hide');
 						//succesful dialog
-					}					
+					}
 				});
 			});
 		});
+
 	</script>

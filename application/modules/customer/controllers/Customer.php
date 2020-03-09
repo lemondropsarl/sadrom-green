@@ -113,9 +113,10 @@ class Customer extends MY_Controller{
             # code...
         }else{
             $data['customer'] = $this->customer_model->get_by_id($customer_id);
-            $data['subscription'] = $this->customer_model->get_customer_sub_id($customer_id);
+            $data['subscription'] = $this->customer_model->get_customer_sub_by_id($customer_id);
             $data['header'] =$this->setting_model->get_app_setting();
             $data['tpls'] = $this->messaging_model->get_tpl();
+            $data['subs'] = $this->customer_model->get_subscriptions();
             $this->load->view('templates/header', $data);
             $this->load->view('templates/topbar_search');
             $this->load->view('templates/topbar_alerts');
@@ -136,8 +137,34 @@ class Customer extends MY_Controller{
         $this->load->view('ctr_customer', $data);
         $this->load->view('templates/footer');
     }
-    function account_renew(){}
-    function account_upgrade(){}
+    function account_renew(){
+       $customer_id =  $this->uri->segment(3);
+       $acc = $this->customer_model->get_acc_by_id($customer_id);
+       $acc_id = intval($acc['acc_id']);
+
+       $start_date = New DateTime();
+       $date = New DateTime();
+       $end_date = date_add($date,date_interval_create_from_date_string("365 days"));
+       $acc = array(
+          'start_date'=> $start_date->format("d-m-Y"),
+          'end_date'=> $end_date->format("d-m-Y")
+
+       );
+       $this->customer_model->update_customer_account($data,$acc_id);
+       redirect('customer/details/'.$customer_id);
+        
+    }
+    function account_upgrade(){
+       $customer_id =  $this->uri->segment(3);
+       $acc = $this->customer_model->get_acc_by_id($customer_id);
+       $acc_id = intval($acc['acc_id']);
+       $data  = array(
+           'subscription_id'=>$this->input->post('sub') 
+       );
+       $this->customer_model->update_customer_account($data,$acc_id);
+       redirect('customer/details/'.$customer_id);
+        
+    }
     function account_suspend(){}
 
 }
