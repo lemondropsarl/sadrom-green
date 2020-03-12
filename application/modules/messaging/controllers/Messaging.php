@@ -20,7 +20,7 @@ class Messaging extends MY_Controller{
         $message = $this->input->post('smstxt');
         //get the sender from app setting
         $sender = $this->setting_model->get_sender();
-        $sender_name=$this->setting_model->get_sender_name();
+        $sender_name= $this->setting_model->get_sender_name();
 
         $done = $this->messaging_model->sendSMS($sender,$receiver,$message,$sender_name);
         if (!$done) {

@@ -15,13 +15,13 @@ class messaging_model extends CI_Model{
    
     public function sendSMS($sender, $receiver, $message, $senderName){
         $appId = $this->config->item('osms_appId');
-        $api = $this->setting_model->get_api_by_appId($appId);
-
+        $apiToken = $this->setting_model->get_api_by_appId($appId);
+        
         $senderAddress = 'tel:+'.$sender;
         $receiverAddress = 'tel:+'.$receiver;
         //Instatiate
         $config = array(
-            'token' => $api['api_token']
+            'token' => $apiToken
         );
         $osms = New Osms($config);
         $osms->setVerifyPeerSSL(false);

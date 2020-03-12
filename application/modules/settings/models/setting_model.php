@@ -21,14 +21,11 @@ class setting_model extends CI_Model{
     }
     public function get_api_by_appId($appId){
         $query = $this->db->get_where('api_setting',array('api_appId' =>$appId));
-        $query->row_array();
-        if ($query == null) {
-            # code...
-            echo "this api is not set please to go setting";
-        }else {
-            
-            return $query;
+        $api = $query->row_array();
+        if (!empty($api['api_token'])) {
+         return $api['api_token'];
         }
+        
     }
     public function get_api_validity($name){
         $this->db->select('api_validity');
@@ -84,19 +81,19 @@ class setting_model extends CI_Model{
     public function get_sender(){
         $this->db->select('app_contact');
         $row = $this->db->get('app_setting');
-        $row->row_array();
-        if (!empty($row['app_contact'])) {
+        $app = $row->row_array();
+        if (!empty($app['app_contact'])) {
             # code...
-            return $row['app_contact'];
+            return $app['app_contact'];
         }
     }
     public function get_sender_name(){
         $this->db->select('app_contact_name');
         $row = $this->db->get('app_setting');
-        $row->row_array();
-        if (!empty($row['app_contact'])) {
+        $app = $row->row_array();
+        if (!empty($app['app_contact'])) {
             # code...
-            return $row['app_contact_name'];
+            return $app['app_contact_name'];
         }
     }
 }
