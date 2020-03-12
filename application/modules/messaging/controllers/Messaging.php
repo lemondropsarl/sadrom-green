@@ -7,6 +7,7 @@ class Messaging extends MY_Controller{
         parent::__construct();
        
         $this->load->model('settings/setting_model');
+        $this->load->model('customer/customer_model');
         $this->load->model('messaging_model');
        
         $this->load->database();
@@ -15,8 +16,8 @@ class Messaging extends MY_Controller{
     function send(){
 
         
-        $receiver = $this->input->post('pnumber');
-        $message = $this->input->post('message');
+        $receiver = $this->input->post('dphone');
+        $message = $this->input->post('smstxt');
         //get the sender from app setting
         $sender = $this->setting_model->get_sender();
         $sender_name=$this->setting_model->get_sender_name();
@@ -30,6 +31,22 @@ class Messaging extends MY_Controller{
             echo "message sent successfully";
         }
 
+    }
+    function sms(){
+        $data['header'] = $this->setting_model->get_app_setting();
+        $mycustomers = $this->customer_model->customers();
+        $rows = array();
+        foreach ($mycustomers as $key => $value) {
+                $rows[$key]['name'] = $value['first_name'].' '.$value['last_name'];
+                $rows[$key]['phone'] = $value['phone_number'];
+        }
+       $data['customers'] = $rows;
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/topbar_search');
+        $this->load->view('templates/topbar_alerts');
+        $this->load->view('templates/topbar_user_info');
+        $this->load->view('sms',$data);
+        $this->load->view('templates/footer');
     }
     function template(){
         $data['header'] = $this->setting_model->get_app_setting();
@@ -60,8 +77,16 @@ class Messaging extends MY_Controller{
         $this->messaging_model->tpl_update($id,$data);
         redirect('messaging/template');
     }
-    
+    function tpl(){
+        
 
+            $id = $_POST('id');
+           
+           $tpl = $this->messaging_model->tpl_by_id($id);
+
+           return json_encode($tpl['sms_description']);
+        
+    }
 }
 
 ?>

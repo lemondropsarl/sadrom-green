@@ -11,6 +11,12 @@ class customer_model extends CI_Model {
                 $query =  $this->db->get('view_customer');
                 return $query->result_array();
         }
+        public function customers(){
+               // $this->db->select('first_name','last_name','phone_number');
+                $query = $this->db->get('customers');
+               return $query->result_array();
+               
+        }
         public function get_by_id($id){
                               
                 $query = $this->db->get_where('view_customer',array('cust_id'=> $id));
@@ -55,11 +61,6 @@ class customer_model extends CI_Model {
         }
         public function get_customer_count(){
                return  $this->db->count_all('customers');
-        }
-        public function get_customer_phone_number($id){
-               $this->db->select('phone_number');
-               $query = $this->db->get_where('customers',array('cust_id'=>$id));
-               return $query->row_array();
         }
         public function get_customer_names($id){
                 $this->db->select(array('first_name','last_name'));
