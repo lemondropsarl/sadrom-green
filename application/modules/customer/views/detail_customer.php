@@ -124,14 +124,14 @@ $diff  = date_diff($date1,$date2);
 						<label class="col-sm-3 col-form-label">Numero Tel</label>
 						<div class="col-sm-7">
 							<input type="hidden" name="cid" id="cid" value="<?php echo $customer['cust_id'];?>">
-							<input type="text" id="pnumber" name="pnumber" class="form-control readonly" readonly="true"
+							<input type="text" id="dphone" name="dphone" class="form-control readonly" readonly="true"
 								value="<?php echo $customer['phone_number']; ?>" />
 						</div>
 					</div>
 					<div class="form-group form-row">
 						<label class="col-sm-3 col-form-label">Message</label>
 						<div class="col-sm-7">
-							<textarea name="tpltxt" id="tpltxt" cols="30" rows="3" class="form-control"></textarea>
+							<textarea name="smstxt" id="smstxt" cols="30" rows="3" class="form-control"></textarea>
 						</div>
 					</div>
 
