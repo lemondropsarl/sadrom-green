@@ -10,7 +10,7 @@ class Customer extends MY_Controller{
         $this->load->model('settings/setting_model');
         $this->load->model('messaging/messaging_model');
         $this->load->library('form_validation');
-        $this->load->database();
+        
     }
     function list(){
         $data['header'] =$this->setting_model->get_app_setting();

@@ -9,8 +9,6 @@ class messaging_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->load->model('settings/setting_model');
-        $this->load->database();
-
     }
    
     public function sendSMS($sender, $receiver, $message, $senderName){

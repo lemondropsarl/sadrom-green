@@ -8,12 +8,12 @@ class Settings extends MX_Controller{
         parent::__construct();
         $this->load->model('setting_model');
         $this->load->library('form_validation');
-        $this->load->database();
+        
     }
     function apis(){
         $data['apis'] =  $this->setting_model->get_apis();
-       
-        $this->load->view('templates/header');
+        $data['app'] = $this->setting_model->get_app_setting();
+        $this->load->view('templates/header',$data);
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -49,18 +49,33 @@ class Settings extends MX_Controller{
     }
     function api_token(){}
     function api_remove($id){}
+    
     function app_setting_add(){
-
+     
+           $model = array();
+           $model['app_name'] = $this->input->post('app_name');
+           if (isset($_POST['app_tag'])) {
+              $model['app_tag'] = $this->input->post('app_tag');
+           }
+           if (isset($_POST['logo'])) {
+               $model['app_logo_url'] = $this->input->post('logo');
+           }
+           $model['app_contact'] = $this->input->post('sender');
+           $model['app_contact_name'] =$this->input->post('sender_name');
+           $model['app_version'] = '0.1.0';
+           $this->setting_model->app_setting_add($model);
+           redirect('settings/app_setting');     
     }
     function app_setting_edit(){
 
     }
-    function get_app_setting(){
+    function app_setting(){
+        
 
         //get header data
-        $data['header'] = $this->setting_model->get_app_setting();
-        $data['app'] = $data['header'];
-        $this->load->view('templates/header',$data);
+        
+        $data['app'] = $this->setting_model->get_app_setting();
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');

@@ -9,8 +9,6 @@ class Messaging extends MY_Controller{
         $this->load->model('settings/setting_model');
         $this->load->model('customer/customer_model');
         $this->load->model('messaging_model');
-       
-        $this->load->database();
     }
 
     function send(){

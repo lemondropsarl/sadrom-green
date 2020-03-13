@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 	<div class="card-row">
 	<!-- GEneral settings-->
 		<div class="col-xl-3 col-md-12 mb-4">
-			<?php if ($app ==null) {?>
+			<?php if ($app == null) {?>
 
 			<div class="card shadow mb-4">
 				<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
@@ -43,14 +43,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 						<div class="form-group form-row">
 							<label class="col-sm-3 col-form-label">Numero contact</label>
 							<div class="col-sm-6">
-								<input type="text" id="app_sender" name="app_sender" class="form-control" />
+								<input type="text" id="sender" name="sender" class="form-control" />
 
 							</div>
 						</div>
 						<div class="form-group form-row">
 							<label class="col-sm-3 col-form-label">Nom Contact</label>
 							<div class="col-sm-6">
-								<input type="text" id="app_sender_name" name="app_sender_name" class="form-control" />
+								<input type="text" id="sender_name" name="sender_name" class="form-control" />
 
 							</div>
 						</div>
@@ -74,6 +74,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 				</a>
 				<div class="collapse show" id="collapseCardExample">
 					<div class="card-body">
+					<div class="form-group form-row">
+							<label class="col-sm-3 col-form-label">Version</label>
+							<div class="col-sm-6">
+								<label class="col-form-label"><?php echo $app['app_version'];?></label>
+
+							</div>
+						</div>
 						<div class="form-group form-row">
 							<label class="col-sm-3 col-form-label">Nom Application</label>
 							<div class="col-sm-6">
@@ -82,15 +89,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 							</div>
 						</div>
-
+						<?php if (!empty($app['app_tag'])) {?>
+							
 						<div class="form-group form-row">
 							<label class="col-sm-3 col-form-label">Tag</label>
 							<div class="col-sm-6">
 								<input type="text" id="app_tag" name="tag_app" class="form-control" readonly="true"
-									value="<?php echo $app['api_tag'];?>" />
+									value="<?php echo $app['app_tag'];?>" />
 
 							</div>
 						</div>
+						<?php }?>
+						<?php if (!empty($app['app_logo_url'])) {?>
+							
 						<div class="form-group form-row">
 							<label class="col-sm-3 col-form-label">Logo</label>
 							<div class="col-sm-6">
@@ -98,11 +109,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 							</div>
 						</div>
+						<?php } ?>
 						<div class="form-group form-row">
 							<label class="col-sm-3 col-form-label">Numero de contact</label>
 							<div class="col-sm-6">
 								<input type="text" id="app_sender" name="app_sender" class="form-control" readonly="true"
-									value="<?php echo $app['api_contact'];?>" />
+									value="<?php echo $app['app_contact'];?>" />
 
 							</div>
 						</div>
@@ -110,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 							<label class="col-sm-3 col-form-label">Nom contact</label>
 							<div class="col-sm-6">
 								<input type="text" id="app_sender_name" name="app_sender_name" class="form-control" readonly="true"
-									value="<?php echo $app['api_contact_name'];?>" />
+									value="<?php echo $app['app_contact_name'];?>" />
 
 							</div>
 						</div>

@@ -12,7 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Sadrom green</title>
+	<title><?php if (!empty($app['app_name'])) {
+		echo $app['app_name'];
+	}else {
+		echo "Sadrom Green";
+	 }?>
+	</title>
 
 	<!-- Custom fonts for this template-->
 	<link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet"
@@ -41,9 +46,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3"><?php if (!empty($header['app_name'])) {echo $header['app_name'];}else {
-				 	 echo "SADROM <sup>green</sup>";
+				<div class="sidebar-brand-text mx-3"><?php if (!empty($app['app_name'])) {
+					echo $app['app_name']. '<sup>V<sub>'.$app['app_version'].'</sub></sup>';
+				}else {
+				 	 echo "SADROM <sup>v</sup>";
 				}?>
+				
 				</div>
 			</a>
 
@@ -120,7 +128,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="bg-white py-2 collapse-inner rounded">
 
 						<a class="collapse-item" href="<?php echo base_url('settings/apis');?>">APIs </a>
-						<a class="collapse-item" href="<?php echo base_url('settings/get_app_setting')?>">General</a>
+						<a class="collapse-item" href="<?php echo base_url('settings/app_setting')?>">General</a>
 					</div>
 				</div>
 			</li>
