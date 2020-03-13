@@ -17,6 +17,7 @@ class customer_model extends CI_Model {
                return $query->result_array();
                
         }
+        
         public function get_by_id($id){
                               
                 $query = $this->db->get_where('view_customer',array('cust_id'=> $id));

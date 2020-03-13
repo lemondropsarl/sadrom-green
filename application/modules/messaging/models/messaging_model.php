@@ -34,6 +34,7 @@ class messaging_model extends CI_Model{
         }
         
     }
+    public function smsBalance(){}
     public function get_tpl(){
        $query = $this->db->get('tpl_sms');
       return  $query->result_array();
