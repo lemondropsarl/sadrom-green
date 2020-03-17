@@ -89,39 +89,39 @@ class Customer extends MY_Controller{
         $this->load->view('templates/footer');
     }
     function edit(){
-            $customer_id = $this->uri->segment(3);
-            $data['customer'] = $this->customer_model->get_by_id($customer_id);
-            $data['id'] = $customer_id;
-            $data['field_options'] = $this->customer_model->get_areas();
-            $data['header'] =$this->setting_model->get_app_setting();
+        $customer_id = $this->uri->segment(3);
+        $data['customer'] = $this->customer_model->get_by_id($customer_id);
+        $data['id'] = $customer_id;
+        $data['field_options'] = $this->customer_model->get_areas();
+        $data['header'] =$this->setting_model->get_app_setting();
             //form validation
-            $this->form_validation->set_rules('fname','Prénom','required');
-            if($this->form_validation->run() == false) {
+        $this->form_validation->set_rules('fname','Prénom','required');
+        if($this->form_validation->run() == false) {
                 # code...
-                $this->load->view('templates/header', $data);
-                $this->load->view('templates/topbar_search');
-                $this->load->view('templates/topbar_alerts');
-                $this->load->view('templates/topbar_user_info');
-                $this->load->view('edit_customer', $data);
-                $this->load->view('templates/footer');
-            }else {
-                $id = $this->input->post('hid');
-                if ($id == NULL) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/topbar_search');
+            $this->load->view('templates/topbar_alerts');
+            $this->load->view('templates/topbar_user_info');
+            $this->load->view('edit_customer', $data);
+            $this->load->view('templates/footer');
+        }else {
+            $id = $this->input->post('hid');
+            if ($id == NULL) {
                     # code...
-                    echo "error";
-                }else{
+                 echo "error";
+            }else{
 
-                    $model = array(
-                        'first_name'=> $this->input->post('fname'),
-                        'last_name'=> $this->input->post('lname'),
-                        'adresse'=> $this->input->post('address'),
-                        'area_id'=> $this->input->post('darea'),
-                        'phone_number'=> $this->input->post('pnumber')
-                    );
-                    $this->customer_model->update_customer($id,$model);
-                    redirect('customer/details/'.$id);
-                }
+                 $model = array(
+                    'first_name'=> $this->input->post('fname'),
+                    'last_name'=> $this->input->post('lname'),
+                    'adresse'=> $this->input->post('address'),
+                    'area_id'=> $this->input->post('darea'),
+                    'phone_number'=> $this->input->post('pnumber')
+                );
+                $this->customer_model->update_customer($id,$model);
+                redirect('customer/details/'.$id);
             }
+        }
     }
     function details(){
         $customer_id = $this->uri->segment(3);
@@ -208,7 +208,7 @@ class Customer extends MY_Controller{
                     'first_name'=> $model[1],
                     'last_name'=> $model[2],
                     'adresse'=> $model[3],
-                    'area_id'=> $model[4],
+                    'area_id'=> intval($model[4]),
                     'phone_number'=> $model[5]
                 );
                 $customer_id = $this->customer_model->add_customer($data);
@@ -218,13 +218,15 @@ class Customer extends MY_Controller{
                 $end_date = date_add($date,date_interval_create_from_date_string("365 days"));
                 $acc = array(
                    'customer_id'=> $customer_id,
-                   'subscription_id'=> $model[6],
+                   'subscription_id'=> intval($model[6]),
                    'start_date'=> $start_date->format("d-m-Y"),
                    'end_date'=> $end_date->format("d-m-Y")      
                 );
                 $this->customer_model->add_account($acc);
+                $added++;
             }           
-
+            $this->session->set_flashdata('added', strval($added));           
+            redirect('customer/import','refresh');           
         }       
     }
 
