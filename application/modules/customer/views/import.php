@@ -18,11 +18,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 clients ont été importés dans la base de données
             </p>
         </div>
-            <?php echo form_open('customer/batch_insert');?>
+            <?php echo form_open_multipart('customer/batch_insert');?>
             <div class="form-group form-row">
                 <label class="col-sm-2 col-form-label">Fichier</label>
 				<div class="col-sm-6">
-					<input type="file" id="exfile" name="file" class="form-control readonly"/>
+					<input type="file" id="exfile" name="exfile" class="form-control readonly"/>
 				</div>
             </div>
             <div class="form-group">

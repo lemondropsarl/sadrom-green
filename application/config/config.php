@@ -533,6 +533,11 @@ $config['modules_locations'] = array(
     APPPATH . 'modules/' => '../modules/',
 );
 
+
+
+
+
+$config['upload_path'] = 'uploads/';
 /*
   |--------------------------------------------------------------------------
   | SADROM Current version

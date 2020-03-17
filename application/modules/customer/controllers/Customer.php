@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class Customer extends MY_Controller{
 
     function __construct(){
@@ -13,6 +14,13 @@ class Customer extends MY_Controller{
         $this->load->model('settings/setting_model');
         $this->load->model('messaging/messaging_model');
         $this->load->library('form_validation');
+        $config['upload_path'] = './uploads/files/';
+        $config['allowed_types'] = 'csv|xlsx';
+        $config['max_size']     = '100';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+
+        $this->load->library('upload',$config);
         
     }
     function list(){
@@ -80,82 +88,15 @@ class Customer extends MY_Controller{
         $this->load->view('import',$data);
         $this->load->view('templates/footer');
     }
-    function batch_insert(){
-        $file_mimes = array
-        (
-            'text/x-comma-separated-values', 
-            'text/comma-separated-values', 
-            'application/octet-stream', 
-            'application/vnd.ms-excel', 
-            'application/x-csv', 
-            'text/x-csv', 
-            'text/csv', 
-            'application/csv', 
-            'application/excel', 
-            'application/vnd.msexcel', 
-            'text/plain', 
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        
-        if (isset($_FILES['file']['name']) && in_array($_FILES['file']['type'], $file_mimes)) {
-           //get file extension
-            $arr_file = explode('.', $_FILES['file']['name']);
-            $extension = end($arr_file);
-
-            //instantiate according to extension
-            if('csv' == $extension) {
-                $reader = new Csv();
-            } else {
-                $reader = new Xlsx();
-            }
-            $spreadsheet = $reader->load($_FILES['file']['tmp_name']);
-            $sheetData = $spreadsheet->getActiveSheet();
-            $highestRow = $worksheet->getHighestRow(); // e.g. 10
-            $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
-            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
-            $added=0;
-            //Iterate in the file
-            for ($row=0; $row <= $highestRow ; $row++) { 
-               for ($col=0; $col <=$highestColumnIndex ; $col++) { 
-                   $first_name = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                   $last_name = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                   $address = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                   $area = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                   $phoneNumber = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                   $subscription = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                   $custNo = $this->customer_model->get_customer_no(); // get customer NO
-                   
-                   $data  = array
-                   (
-                        'customer_no'=> $custNo,
-                        'first_name'=> $first_name,
-                        'last_name'=> $last_name,
-                        'adresse'=> $address,
-                        'area_id'=> $area,
-                        'phone_number'=> $phoneNumber
-                 );
-                    //saving to database
-                    $this->customer_model->add_customer($data);
-               }
-               $added++;
-            }
-            $this->session->set_flashdata('added', $added);           
-            redirect('customer/import');
-
-        }
-
-        
-    }
     function edit(){
-        $customer_id = $this->uri->segment(3);
-       
+            $customer_id = $this->uri->segment(3);
             $data['customer'] = $this->customer_model->get_by_id($customer_id);
             $data['id'] = $customer_id;
             $data['field_options'] = $this->customer_model->get_areas();
             $data['header'] =$this->setting_model->get_app_setting();
             //form validation
             $this->form_validation->set_rules('fname','Prénom','required');
-
-            if ($this->form_validation->run() == false) {
+            if($this->form_validation->run() == false) {
                 # code...
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/topbar_search');
@@ -164,7 +105,6 @@ class Customer extends MY_Controller{
                 $this->load->view('edit_customer', $data);
                 $this->load->view('templates/footer');
             }else {
-                
                 $id = $this->input->post('hid');
                 if ($id == NULL) {
                     # code...
@@ -181,9 +121,7 @@ class Customer extends MY_Controller{
                     $this->customer_model->update_customer($id,$model);
                     redirect('customer/details/'.$id);
                 }
-              
             }
-       
     }
     function details(){
         $customer_id = $this->uri->segment(3);
@@ -245,5 +183,49 @@ class Customer extends MY_Controller{
         
     }
     function account_suspend(){}
+    function batch_insert(){
+       
+        if ($this->upload->do_upload('exfile')){
+           
+            $file_name = $this->upload->data('full_path');
+            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+            $spreadsheet = $reader->load($file_name);
+
+            $sheetWork = $spreadsheet->getActiveSheet();
+            $highestRow = $sheetWork->getHighestRow(); // e.g. 10
+            $highestColumn = $sheetWork->getHighestColumn(); // e.g 'F'
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
+            $added=0;
+            
+            for ($row=2; $row <= $highestRow ; $row++) { 
+                $model = array();
+                $model[0] = $this->customer_model->get_customer_no(); // get customer NO
+                for ($col=1; $col <= $highestColumnIndex ; $col++) { 
+                   $model[$col] = $sheetWork->getCellByColumnAndRow($col,$row)->getValue();
+                }
+                $data = array(
+                    'customer_no'=> $model[0],
+                    'first_name'=> $model[1],
+                    'last_name'=> $model[2],
+                    'adresse'=> $model[3],
+                    'area_id'=> $model[4],
+                    'phone_number'=> $model[5]
+                );
+                $customer_id = $this->customer_model->add_customer($data);
+ 
+                $start_date = New DateTime();
+                $date = New DateTime();
+                $end_date = date_add($date,date_interval_create_from_date_string("365 days"));
+                $acc = array(
+                   'customer_id'=> $customer_id,
+                   'subscription_id'=> $model[6],
+                   'start_date'=> $start_date->format("d-m-Y"),
+                   'end_date'=> $end_date->format("d-m-Y")      
+                );
+                $this->customer_model->add_account($acc);
+            }           
+
+        }       
+    }
 
 }
