@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\Csv;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 class Customer extends MY_Controller{
 
     function __construct(){
@@ -13,7 +16,7 @@ class Customer extends MY_Controller{
         
     }
     function list(){
-        $data['header'] =$this->setting_model->get_app_setting();
+        $data['app'] =$this->setting_model->get_app_setting();
         $data['clients'] =  $this->customer_model->get_customers();
         $this->load->view('templates/header',$data);
         $this->load->view('templates/topbar_search');
@@ -65,6 +68,82 @@ class Customer extends MY_Controller{
         //load successfull ;essage
         redirect('customer/list');
        }
+    }
+    function import(){
+        $data['app'] =$this->setting_model->get_app_setting();
+        $data['added'] = $this->session->flashdata('added');
+        
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/topbar_search');
+        $this->load->view('templates/topbar_alerts');
+        $this->load->view('templates/topbar_user_info');
+        $this->load->view('import',$data);
+        $this->load->view('templates/footer');
+    }
+    function batch_insert(){
+        $file_mimes = array
+        (
+            'text/x-comma-separated-values', 
+            'text/comma-separated-values', 
+            'application/octet-stream', 
+            'application/vnd.ms-excel', 
+            'application/x-csv', 
+            'text/x-csv', 
+            'text/csv', 
+            'application/csv', 
+            'application/excel', 
+            'application/vnd.msexcel', 
+            'text/plain', 
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        
+        if (isset($_FILES['file']['name']) && in_array($_FILES['file']['type'], $file_mimes)) {
+           //get file extension
+            $arr_file = explode('.', $_FILES['file']['name']);
+            $extension = end($arr_file);
+
+            //instantiate according to extension
+            if('csv' == $extension) {
+                $reader = new Csv();
+            } else {
+                $reader = new Xlsx();
+            }
+            $spreadsheet = $reader->load($_FILES['file']['tmp_name']);
+            $sheetData = $spreadsheet->getActiveSheet();
+            $highestRow = $worksheet->getHighestRow(); // e.g. 10
+            $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
+            $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn); // e.g. 5
+            $added=0;
+            //Iterate in the file
+            for ($row=0; $row <= $highestRow ; $row++) { 
+               for ($col=0; $col <=$highestColumnIndex ; $col++) { 
+                   $first_name = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                   $last_name = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                   $address = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                   $area = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                   $phoneNumber = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                   $subscription = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
+                   $custNo = $this->customer_model->get_customer_no(); // get customer NO
+                   
+                   $data  = array
+                   (
+                        'customer_no'=> $custNo,
+                        'first_name'=> $first_name,
+                        'last_name'=> $last_name,
+                        'adresse'=> $address,
+                        'area_id'=> $area,
+                        'phone_number'=> $phoneNumber
+                 );
+                    //saving to database
+                    $this->customer_model->add_customer($data);
+               }
+               $added++;
+            }
+            $this->session->set_flashdata('added', $added);           
+            redirect('customer/import');
+
+        }
+
+        
     }
     function edit(){
         $customer_id = $this->uri->segment(3);

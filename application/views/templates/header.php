@@ -84,6 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<div class="bg-white py-2 collapse-inner rounded">
 						<h6 class="collapse-header">Menu client</h6>
 						<a class="collapse-item" href="<?php echo base_url('customer/insert');?>">Nouveau client</a>
+						<a class="collapse-item" href="<?php echo base_url('customer/import');?>">Importer du fichier excel</a>
 						<a class="collapse-item" href="<?php echo base_url('customer/list');?>">Tous les clients</a>
 						<a class="collapse-item" href="<?php echo base_url('customer/account');?>">Gestion de
 							contrat</a>
