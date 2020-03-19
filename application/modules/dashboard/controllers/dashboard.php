@@ -5,9 +5,13 @@ class Dashboard extends MY_Controller{
         
         function __construct(){
             parent::__construct();
+            $this->load->library('ion_auth');
             $this->load->model('settings/setting_model');
             $this->load->model('customer/customer_model');
             $this->load->model('messaging/messaging_model');
+            if ($this->ion_auth->logged_in() ===FALSE) {
+               redirect('auth/login');
+            }
         }
 
         function index(){
