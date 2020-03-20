@@ -543,11 +543,16 @@ $config['upload_path'] = 'uploads/';
   | SADROM Current version
   |--------------------------------------------------------------------------
 */
-$config['current_version'] = '0.1.0';
+$config['app']['version']   = '0.1.0';
+$config['app']['name']      = '';
+$config['app']['tag']       = '';
+$config['app']['logo_url']  = '';
 
 /*
   |--------------------------------------------------------------------------
-  | SADROM ORANGE SMS APP ID
+  | SADROM ORANGE SMS API
   |--------------------------------------------------------------------------
 */
-$config['osms_appId'] = 'B7TRNnGJWwRpfNKZ';
+$config['osms_appId']       = 'B7TRNnGJWwRpfNKZ';
+$config['osms_sender']      = '';
+$config['osms_sender_name'] = '';
