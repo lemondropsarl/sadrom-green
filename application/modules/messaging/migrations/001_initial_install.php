@@ -9,8 +9,8 @@ class Migration_initial_install extends MY_Migration {
     public function __construct()
     {
         $this->load->dbforge();
-        $this->load->config('messaging',TRUE);
-        $this->tables = $this->config->item('tables','messaging');
+        $this->load->config('messaging_config',TRUE);
+        $this->tables = $this->config->item('tables','messaging_config');
         
     }
 

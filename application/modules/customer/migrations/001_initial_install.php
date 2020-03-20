@@ -8,9 +8,9 @@ class Migration_initial_install extends MY_Migration{
     {
         parent::__construct();
         $this->load->dbforge();
-        $this->load->config('customer',TRUE);
-        $this->tables = $this->config->item('tables', 'customer');
-        $this->views  = $this->config->item('views', 'customer');
+        $this->load->config('customer_config',TRUE);
+        $this->tables = $this->config->item('tables', 'customer_config');
+        $this->views  = $this->config->item('views', 'customer_config');
     }
     public function up(){
         //drop table 'area' 
