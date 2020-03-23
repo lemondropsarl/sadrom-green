@@ -2,14 +2,14 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_initial_install extends MY_Migration {
+class Migration_initial_setting extends MY_Migration {
     private $tables;
 
     public function __construct()
     {
         $this->load->dbforge();
-        $this->load->config('setting_config',TRUE);
-        $this->tables = $this->config->item('tables','setting_config');
+        $this->load->config('settings/setting',TRUE);
+        $this->tables = $this->config->item('tables','setting');
     }
 
     public function up() {
@@ -50,7 +50,7 @@ class Migration_initial_install extends MY_Migration {
             ],
         ]);
         $this->dbforge->add_key('api_id',TRUE);
-        $this->dbforge->create_table($this->tables['api_setting']);
+        $this->dbforge->create_table($this->tables['api_setting'],TRUE);
 
     }
 

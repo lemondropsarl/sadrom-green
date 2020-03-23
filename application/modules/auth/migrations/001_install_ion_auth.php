@@ -268,6 +268,9 @@ class Migration_Install_ion_auth extends MY_Migration {
 		]);
 		$this->dbforge->create_table($this->tables['ci_sessions']);
 
+		//install the reste of the table
+
+
 	}
 
 	public function down() {

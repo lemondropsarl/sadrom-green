@@ -9,9 +9,12 @@ class Dashboard extends MY_Controller{
             $this->load->model('settings/setting_model');
             $this->load->model('customer/customer_model');
             $this->load->model('messaging/messaging_model');
-            if ($this->ion_auth->logged_in() ===FALSE) {
+            $this->load->library('migration');
+            $this->config->set_item('sess_driver','database');
+            $this->migration->migrate_all_modules();
+            /*if ($this->ion_auth->logged_in() ===FALSE) {
                redirect('auth/login');
-            }
+            }*/
         }
 
         function index(){

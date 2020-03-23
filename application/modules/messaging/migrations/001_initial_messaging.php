@@ -2,15 +2,15 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_initial_install extends MY_Migration {
+class Migration_initial_messaging extends MY_Migration {
     
     private $tables;
 
     public function __construct()
     {
         $this->load->dbforge();
-        $this->load->config('messaging_config',TRUE);
-        $this->tables = $this->config->item('tables','messaging_config');
+        $this->load->config('messaging/messaging',TRUE);
+        $this->tables = $this->config->item('tables','messaging');
         
     }
 
