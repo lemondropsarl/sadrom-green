@@ -455,9 +455,8 @@ class MY_Migration
 	protected function _update_version($migrations, $module = '')
 	{
 		! $module AND $module = $this->_current_module;
-		$row = $this->db->get_where('migrations', array('module' => $module));
-		$ob = $row->row();
-		
+		$row = $this->db->get_where('migrations', array('module' => $module));	
+		$ob = $row->row();	
 		if ($ob != null) {
 			return $this->db->where(array('module' => $module))->update('migrations', array('version' => $migrations));
 		} else {
