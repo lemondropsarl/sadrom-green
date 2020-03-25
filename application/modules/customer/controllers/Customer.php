@@ -24,7 +24,6 @@ class Customer extends MY_Controller{
         
     }
     function list(){
-        $data['app'] =$this->setting_model->get_app_setting();
         $data['clients'] =  $this->customer_model->get_customers();
         $this->load->view('templates/header',$data);
         $this->load->view('templates/topbar_search');
@@ -38,11 +37,10 @@ class Customer extends MY_Controller{
        $data['customer_no'] = $this->customer_model->get_customer_no();
        $data['field_options'] = $this->customer_model->get_areas();
        $data['sub_options'] = $this->customer_model->get_subscriptions();
-       $data['header'] =$this->setting_model->get_app_setting();
        $this->form_validation->set_rules('fname','Prénom','required');
        if ($this->form_validation->run() == FALSE) {
            # code...
-           $this->load->view('templates/header',$data);
+           $this->load->view('templates/header');
            $this->load->view('templates/topbar_search');
            $this->load->view('templates/topbar_alerts');
            $this->load->view('templates/topbar_user_info');
@@ -78,10 +76,9 @@ class Customer extends MY_Controller{
        }
     }
     function import(){
-        $data['app'] =$this->setting_model->get_app_setting();
         $data['added'] = $this->session->flashdata('added');
         
-        $this->load->view('templates/header',$data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -93,12 +90,11 @@ class Customer extends MY_Controller{
         $data['customer'] = $this->customer_model->get_by_id($customer_id);
         $data['id'] = $customer_id;
         $data['field_options'] = $this->customer_model->get_areas();
-        $data['header'] =$this->setting_model->get_app_setting();
             //form validation
         $this->form_validation->set_rules('fname','Prénom','required');
         if($this->form_validation->run() == false) {
                 # code...
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/header');
             $this->load->view('templates/topbar_search');
             $this->load->view('templates/topbar_alerts');
             $this->load->view('templates/topbar_user_info');
@@ -131,10 +127,9 @@ class Customer extends MY_Controller{
         }else{
             $data['customer'] = $this->customer_model->get_by_id($customer_id);
             $data['subscription'] = $this->customer_model->get_customer_sub_by_id($customer_id);
-            $data['header'] =$this->setting_model->get_app_setting();
             $data['tpls'] = $this->messaging_model->get_tpl();
             $data['subs'] = $this->customer_model->get_subscriptions();
-            $this->load->view('templates/header', $data);
+            $this->load->view('templates/header');
             $this->load->view('templates/topbar_search');
             $this->load->view('templates/topbar_alerts');
             $this->load->view('templates/topbar_user_info');
@@ -146,8 +141,7 @@ class Customer extends MY_Controller{
     }
     function account(){
         $data['contracts'] = $this->customer_model->get_contract();
-        $data['header'] =$this->setting_model->get_app_setting();
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');

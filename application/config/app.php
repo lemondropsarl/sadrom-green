@@ -6,10 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | SADROM APPLICATION 
   |--------------------------------------------------------------------------
 */
-$config['app']['version']   = '0.1.0';
-$config['app']['name']      = 'SADROM';
-$config['app']['tag']       = '';
-$config['app']['logo_url']  = '';
+$config['application']['version']   = '0.1.0';
+$config['application']['name']      = 'SADROM';
+$config['application']['tag']       = '';
+$config['application']['logo_url']  = '';
 
 /*
   |--------------------------------------------------------------------------

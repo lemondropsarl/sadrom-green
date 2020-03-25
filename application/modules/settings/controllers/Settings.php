@@ -12,8 +12,7 @@ class Settings extends MX_Controller{
     }
     function apis(){
         $data['apis'] =  $this->setting_model->get_apis();
-        $data['app'] = $this->setting_model->get_app_setting();
-        $this->load->view('templates/header',$data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -74,8 +73,7 @@ class Settings extends MX_Controller{
 
         //get header data
         
-        $data['app'] = $this->setting_model->get_app_setting();
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');

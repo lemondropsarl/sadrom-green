@@ -31,7 +31,6 @@ class Messaging extends MY_Controller{
 
     }
     function sms(){
-        $data['header'] = $this->setting_model->get_app_setting();
         $mycustomers = $this->customer_model->customers();
         $rows = array();
         foreach ($mycustomers as $key => $value) {
@@ -39,7 +38,7 @@ class Messaging extends MY_Controller{
                 $rows[$key]['phone'] = $value['phone_number'];
         }
        $data['customers'] = $rows;
-        $this->load->view('templates/header',$data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -47,10 +46,9 @@ class Messaging extends MY_Controller{
         $this->load->view('templates/footer');
     }
     function template(){
-        $data['header'] = $this->setting_model->get_app_setting();
         $data['tpls'] = $this->messaging_model->get_tpl();
 
-        $this->load->view('templates/header',$data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
