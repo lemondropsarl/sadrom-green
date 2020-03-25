@@ -71,17 +71,13 @@ class Settings extends MX_Controller{
 
     }
     function app_setting(){
-        
-
-        //get header data
-        
         $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
-        $this->load->view('app_setting', $data);
+        $this->load->view('errors/404');
         $this->load->view('templates/footer');
-
+        
     }
     
 }
