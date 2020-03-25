@@ -10,6 +10,7 @@ class Messaging extends MY_Controller{
         $this->load->model('settings/setting_model');
         $this->load->model('customer/customer_model');
         $this->load->model('messaging_model');
+        $this->load->config('app',TRUE);
     }
 
     function send(){
@@ -18,8 +19,8 @@ class Messaging extends MY_Controller{
         $receiver = $this->input->post('dphone');
         $message = $this->input->post('smstxt');
         //get the sender from app setting
-        $sender = $this->setting_model->get_sender();
-        $sender_name= $this->setting_model->get_sender_name();
+        $sender = $this->config->item('osms_sender','app');
+        $sender_name= $this->config->item('osms_sender_name','app');
 
         $done = $this->messaging_model->sendSMS($sender,$receiver,$message,$sender_name);
         if (!$done) {

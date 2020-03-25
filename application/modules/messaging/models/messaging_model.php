@@ -9,10 +9,11 @@ class messaging_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->load->model('settings/setting_model');
+        $this->load->config('app',TRUE);
     }
    
     public function sendSMS($sender, $receiver, $message, $senderName){
-        $appId = $this->config->item('osms_appId');
+        $appId = $this->config->item('osms_appId','app');
         $apiToken = $this->setting_model->get_api_by_appId($appId);
         
         $senderAddress = 'tel:+'.$sender;
