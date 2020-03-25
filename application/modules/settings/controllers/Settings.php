@@ -6,6 +6,8 @@ class Settings extends MX_Controller{
     function __construct(){
 
         parent::__construct();
+        $this->load->database();
+        $this->load->library('session');
         $this->load->model('setting_model');
         $this->load->library('form_validation');
         

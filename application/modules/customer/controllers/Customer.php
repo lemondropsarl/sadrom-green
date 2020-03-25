@@ -10,6 +10,9 @@ class Customer extends MY_Controller{
     function __construct(){
 
         parent::__construct();
+        $this->load->database();
+        $this->load->library('session');
+        
         $this->load->model('customer_model');
         $this->load->model('settings/setting_model');
         $this->load->model('messaging/messaging_model');

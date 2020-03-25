@@ -11,7 +11,7 @@ class Dashboard extends MY_Controller{
             $this->load->model('settings/setting_model');
             $this->load->model('customer/customer_model');
             $this->load->model('messaging/messaging_model');
-            $this->load->library('migration');
+            
             $this->load->config('app',TRUE);
             $this->app = $this->config->item('app','app');
             if($this->ion_auth->logged_in() ===FALSE){
