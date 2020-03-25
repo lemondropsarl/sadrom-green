@@ -178,12 +178,13 @@ class MY_Migration
 		}
 
 		return TRUE;
+		
 	}
 
 	public function list_all_modules_with_migrations()
 	{
 		$modules = $this->list_all_modules();
-
+		
 		foreach ($modules as $i => $module) {
 			list($location, $name) = $module;
 
@@ -454,8 +455,9 @@ class MY_Migration
 	protected function _update_version($migrations, $module = '')
 	{
 		! $module AND $module = $this->_current_module;
-		$row = $this->db->get_where('migrations', array('module' => $module))->row();
-		if (count($row)) {
+		$row = $this->db->get_where('migrations', array('module' => $module));	
+		$ob = $row->row();	
+		if ($ob != null) {
 			return $this->db->where(array('module' => $module))->update('migrations', array('version' => $migrations));
 		} else {
 			return $this->db->insert('migrations', array('module' => $module, 'version' => $migrations));

@@ -6,14 +6,15 @@ class Settings extends MX_Controller{
     function __construct(){
 
         parent::__construct();
+        $this->load->database();
+        $this->load->library('session');
         $this->load->model('setting_model');
         $this->load->library('form_validation');
         
     }
     function apis(){
         $data['apis'] =  $this->setting_model->get_apis();
-        $data['app'] = $this->setting_model->get_app_setting();
-        $this->load->view('templates/header',$data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
@@ -70,18 +71,13 @@ class Settings extends MX_Controller{
 
     }
     function app_setting(){
-        
-
-        //get header data
-        
-        $data['app'] = $this->setting_model->get_app_setting();
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/header');
         $this->load->view('templates/topbar_search');
         $this->load->view('templates/topbar_alerts');
         $this->load->view('templates/topbar_user_info');
-        $this->load->view('app_setting', $data);
+        $this->load->view('errors/404');
         $this->load->view('templates/footer');
-
+        
     }
     
 }

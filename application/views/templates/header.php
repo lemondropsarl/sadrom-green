@@ -11,13 +11,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-
-	<title><?php if (!empty($app['app_name'])) {
-		echo $app['app_name'];
-	}else {
-		echo "Sadrom Green";
-	 }?>
-	</title>
+<?php
+global $app;
+$this->load->config('app',TRUE);
+$this->app = $this->config->item('application','app');
+?>
+	<title><?php $this->app['name']?></title>
 
 	<!-- Custom fonts for this template-->
 	<link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css');?>" rel="stylesheet"
@@ -46,11 +45,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
-				<div class="sidebar-brand-text mx-3"><?php if (!empty($app['app_name'])) {
-					echo $app['app_name']. '<sup>V<sub>'.$app['app_version'].'</sub></sup>';
-				}else {
-				 	 echo "SADROM <sup>v</sup>";
-				}?>
+				<div class="sidebar-brand-text mx-3"><?php echo $this->app['name']
+					.'<sup>V<sub>'.$this->app['version'].'</sub></sup>' ?>
 				
 				</div>
 			</a>
