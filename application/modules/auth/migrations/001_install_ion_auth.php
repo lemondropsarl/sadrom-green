@@ -7,7 +7,7 @@ class Migration_Install_ion_auth extends MY_Migration {
 		parent::__construct();
 		$this->load->dbforge();
 
-		$this->load->config('ion_auth', TRUE);
+		$this->load->config('auth/ion_auth', TRUE);
 		$this->tables = $this->config->item('tables', 'ion_auth');
 	}
 
@@ -116,15 +116,16 @@ class Migration_Install_ion_auth extends MY_Migration {
 				'null'       => TRUE
 			],
 			'created_on' => [
-				'type'       => 'INT',
-				'constraint' => '11',
+				'type'       => 'timestamp',
+				'constraint' => '15',
 				'unsigned'   => TRUE,
+				'default'	=> 'current_timestamp'
 			],
 			'last_login' => [
-				'type'       => 'INT',
-				'constraint' => '11',
+				'type'       => 'timestamp',
+				'constraint' => '15',
 				'unsigned'   => TRUE,
-				'null'       => TRUE
+				'default'       => 'current_timestamp'
 			],
 			'active' => [
 				'type'       => 'TINYINT',
@@ -156,25 +157,6 @@ class Migration_Install_ion_auth extends MY_Migration {
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table($this->tables['users']);
 
-		// Dumping data for table 'users'
-		$data = [
-			'ip_address'              => '127.0.0.1',
-			'username'                => 'administrator',
-			'password'                => '$2y$08$200Z6ZZbp3RAEXoaWcMA6uJOFicwNZaqk4oDhqTUiFXFe63MG.Daa',
-			'email'                   => 'admin@admin.com',
-			'activation_code'         => '',
-			'forgotten_password_code' => NULL,
-			'created_on'              => '1268889823',
-			'last_login'              => '1268889823',
-			'active'                  => '1',
-			'first_name'              => 'Admin',
-			'last_name'               => 'istrator',
-			'company'                 => 'ADMIN',
-			'phone'                   => '0',
-		];
-		$this->db->insert($this->tables['users'], $data);
-
-
 		// Drop table 'users_groups' if it exists
 		$this->dbforge->drop_table($this->tables['users_groups'], TRUE);
 
@@ -199,20 +181,6 @@ class Migration_Install_ion_auth extends MY_Migration {
 		]);
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->create_table($this->tables['users_groups']);
-
-		// Dumping data for table 'users_groups'
-		$data = [
-			[
-				'user_id'  => '1',
-				'group_id' => '1',
-			],
-			[
-				'user_id'  => '1',
-				'group_id' => '2',
-			]
-		];
-		$this->db->insert_batch($this->tables['users_groups'], $data);
-
 
 		// Drop table 'login_attempts' if it exists
 		$this->dbforge->drop_table($this->tables['login_attempts'], TRUE);
