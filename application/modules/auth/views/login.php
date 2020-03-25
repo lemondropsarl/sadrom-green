@@ -39,9 +39,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <!--div class="col-lg-6 d-none d-lg-block bg-login-image"></div-->
               <div class="col-lg-6">
                 <div class="p-5">
-                <div class=" error">
-                  <?php echo validation_errors();?>
-                </div>
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">SADROM GREEN MANAGEMENT</h1>
                   </div>

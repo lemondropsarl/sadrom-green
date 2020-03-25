@@ -959,7 +959,7 @@ class Ion_auth_model extends CI_Model
 				$this->rehash_password_if_needed($user->password, $identity, $password);
 
 				// Regenerate the session (for security purpose: to avoid session fixation)
-				$this->session->sess_regenerate(FALSE);
+				$this->session->sess_regenerate(TRUE);
 
 				$this->trigger_events(['post_login', 'post_login_successful']);
 				$this->set_message('login_successful');

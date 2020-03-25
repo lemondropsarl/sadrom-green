@@ -312,13 +312,13 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
-$database_file = APPPATH.'config/database.php';
+/*$database_file = APPPATH.'config/database.php';
 if(file_exists($database_file)){
    require_once BASEPATH.'core/CodeIgniter.php';
 }else{
    $base_url = 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
    header('Location: '.$base_url.'/install.php');
-}
-
+}*/
+require_once BASEPATH.'core/CodeIgniter.php';
 /* End of file index.php */
 /* Location: ./index.php */

@@ -117,15 +117,16 @@ class Migration_Install_ion_auth extends MY_Migration {
 			],
 			'created_on' => [
 				'type'       => 'timestamp',
-				'constraint' => '15',
+				'constraint' => '6',
 				'unsigned'   => TRUE,
-				'default'	=> 'current_timestamp'
+				'null'	=>	TRUE
 			],
 			'last_login' => [
 				'type'       => 'timestamp',
-				'constraint' => '15',
+				'constraint' => '6',
 				'unsigned'   => TRUE,
-				'default'       => 'current_timestamp'
+				'null'	=> TRUE
+				
 			],
 			'active' => [
 				'type'       => 'TINYINT',
