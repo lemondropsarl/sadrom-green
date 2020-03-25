@@ -226,15 +226,16 @@ class Migration_Install_ion_auth extends MY_Migration {
 			],
 			'timestamp'=>[
 				'type'=>'MEDIUMINT',
-				'constraint'=>'10',
+				'constraint'=>'11',
 				'unsigned' => TRUE,
 				'default' => 0,
-				'unique' => TRUE
+				
 			],
 			'data'=>[
 				'type' => 'blob'
 			]
 		]);
+		$this->dbforge->add_key('id',TRUE);
 		$this->dbforge->create_table($this->tables['ci_sessions']);
 
 		//install the reste of the table
