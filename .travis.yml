@@ -10,5 +10,4 @@ cache:
         - ./vendor
 
 script:
-    - php vendor/bin/phpcs -s
     - php vendor/bin/phpunit
