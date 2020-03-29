@@ -1,13 +1,24 @@
-langage: php
-php:
-    - 7.3
+language: php
+dist: trusty
 
-install:
-    - composer install
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
 
 cache:
     directories:
-        - ./vendor
+        - ./vendor/
+sudo: false
 
-script:
-    - php vendor/bin/phpunit
+before_script:
+  - sh -c "composer install --dev --no-progress"
+ 
+script: 
+    - phpunit
+
+branches:
+  only:
+    - develop
+    - master
